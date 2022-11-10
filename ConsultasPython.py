@@ -47,7 +47,7 @@ def promedio_ganancias_Empresas_SP():
 
 def promedio_precio_Empresas_SP():
     return """select avg(price)
-        from WLS_company;
+        from S_and_P;
         """
 
 def promedio_retorno_Empresas_WLS():
