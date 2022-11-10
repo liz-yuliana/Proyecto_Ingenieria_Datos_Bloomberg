@@ -1,0 +1,53 @@
+CREATE TABLE ticker(
+
+	id_ticker serial NOT NULL,
+	ticker varchar(50) NOT NULL,
+	PRIMARY KEY (id_ticker)
+);
+
+CREATE TABLE sector
+(
+	id_sector serial NOT NULL,
+	sector varchar(30),
+	PRIMARY KEY (id_sector)
+);
+
+CREATE TABLE WLS_country
+(
+	id_country serial NOT NULL,
+	name varchar(40) NOT NULL,
+	weight real NOT NULL,
+	shares real NOT NULL,
+	PRIMARY KEY (id_country)
+);
+
+CREATE TABLE WLS_company
+(
+	id_ticker_company serial NOT NULL,
+	name varchar(50) NOT NULL,
+	country serial NOT NULL,
+	weight real,
+	shares real NOT NULL,
+	price real,
+	sector serial,
+	revenue real,
+	total_return real,
+	PRIMARY KEY (id_ticker_company),
+	FOREIGN KEY (sector) REFERENCES sector (id_sector),
+	FOREIGN KEY (country) REFERENCES WLS_country (id_country),
+	FOREIGN KEY (id_ticker_company) REFERENCES ticker (id_ticker)
+);
+
+CREATE TABLE S_and_P 
+(
+	id_ticker_sp serial NOT NULL,
+	name varchar(50) NOT NULL,
+	id_country serial NOT NULL,
+	price real NOT NULL,
+	sector_company serial NOT NULL,
+	revenue real NOT NULL,
+	PRIMARY KEY (id_ticker_sp),
+	FOREIGN KEY (sector_company) REFERENCES sector (id_sector),
+	FOREIGN KEY (id_country) REFERENCES WLS_country (id_country),
+	FOREIGN KEY (id_ticker_sp) REFERENCES ticker (id_ticker)
+);
