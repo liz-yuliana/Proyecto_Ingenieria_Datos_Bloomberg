@@ -7,7 +7,7 @@ class Connection:
     
     def openConnection(self):
         try:
-            self.connection = psycopg2.connect(user="posgres",
+            self.connection = psycopg2.connect(user="postgres",
                                                password="____", #cambiar
                                                database="proyecto", #base de datos proyecto
                                                host="localhost", 
