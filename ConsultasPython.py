@@ -1,8 +1,8 @@
 def Cantidad_Empresas_WLS():
-    return """select count(ticker)
-        from WLS_company
-        order by country;
-        """
+    return """SELECT c.name, COUNT(t.id_ticker)
+        FROM ticker t INNER JOIN WLS_company w ON (t.id_ticker = w.id_ticker_company) INNER JOIN WLS_country c ON (w.country = c.id_country)
+        GROUP BY c.name
+        ORDER BY 1; """
 
 def promedio_ganancias_Empresas_WLS():
     return """select avg(revenue)
@@ -24,15 +24,16 @@ def ranking_sector():
         from WLS_company;"""
 
 def Cantidad_Empresas_SP():
-    return """select count(ticker)
+    return """select count(id_ticker_sp)
         from S_and_P;
         """
 
 def Cantidad_Empresas_SP_pais():
-    return """select count(ticker)
-        from S_and_P,
-        order by COUNTRY;
-        """
+    return """SELECT c.name, COUNT(t.ticker)
+        FROM ticker t INNER JOIN S_and_P sp ON (t.id_ticker = sp.id_ticker_sp) INNER JOIN WLS_country c ON (sp.id_country = c.id_country)
+        GROUP BY c.name
+        ORDER BY 1; """
+       
 
 def Sect_SP():
     return """select s.name, sp.name
