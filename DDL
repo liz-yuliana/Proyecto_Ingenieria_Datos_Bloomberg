@@ -24,7 +24,7 @@ CREATE TABLE WLS_country
 CREATE TABLE WLS_company
 (
 	id_ticker_company serial NOT NULL,
-	name varchar(50) NOT NULL,
+	name varchar(80) NOT NULL,
 	country serial NOT NULL,
 	weight real,
 	shares real NOT NULL,
