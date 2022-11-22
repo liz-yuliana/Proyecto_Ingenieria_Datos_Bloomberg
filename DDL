@@ -2,6 +2,7 @@ CREATE TABLE ticker(
 
 	id_ticker serial NOT NULL,
 	ticker varchar(50) NOT NULL,
+	company varchar(80) NOT NULL,
 	PRIMARY KEY (id_ticker)
 );
 
@@ -12,19 +13,21 @@ CREATE TABLE sector
 	PRIMARY KEY (id_sector)
 );
 
+
 CREATE TABLE WLS_country
 (
 	id_country serial NOT NULL,
 	name varchar(40) NOT NULL,
 	weight real NOT NULL,
 	shares real NOT NULL,
+	PIB real NOT NULL,
 	PRIMARY KEY (id_country)
 );
 
 CREATE TABLE WLS_company
 (
 	id_ticker_company serial NOT NULL,
-	name varchar(80) NOT NULL,
+	fecha_renovacion date NOT NULL,
 	country serial NOT NULL,
 	weight real,
 	shares real NOT NULL,
@@ -32,7 +35,7 @@ CREATE TABLE WLS_company
 	sector serial,
 	revenue real,
 	total_return real,
-	PRIMARY KEY (id_ticker_company),
+	PRIMARY KEY (id_ticker_company, fecha_renovacion),
 	FOREIGN KEY (sector) REFERENCES sector (id_sector),
 	FOREIGN KEY (country) REFERENCES WLS_country (id_country),
 	FOREIGN KEY (id_ticker_company) REFERENCES ticker (id_ticker)
@@ -41,12 +44,12 @@ CREATE TABLE WLS_company
 CREATE TABLE S_and_P 
 (
 	id_ticker_sp serial NOT NULL,
-	name varchar(50) NOT NULL,
-	id_country serial NOT NULL,
+	fecha date NOT NULL,
 	price real NOT NULL,
+	id_country serial NOT NULL,
 	sector_company serial NOT NULL,
-	revenue real NOT NULL,
-	PRIMARY KEY (id_ticker_sp),
+	revenue real,
+	PRIMARY KEY (id_ticker_sp, fecha),
 	FOREIGN KEY (sector_company) REFERENCES sector (id_sector),
 	FOREIGN KEY (id_country) REFERENCES WLS_country (id_country),
 	FOREIGN KEY (id_ticker_sp) REFERENCES ticker (id_ticker)
