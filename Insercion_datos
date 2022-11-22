@@ -2,7 +2,7 @@
 
 -- Ticker
  
-COPY ticker (ticker) FROM 'C:\Proyecto_Ing\Ticker.csv'
+COPY ticker (ticker, company) FROM 'C:\Proyecto_Ing\Ticker_F.csv'
 WITH DELIMITER ',' CSV HEADER;
 
 --Sector
@@ -12,15 +12,15 @@ WITH DELIMITER ',' CSV HEADER;
 
 --Country
 
-COPY WLS_country (name, weight, shares, id_country) 
-FROM 'C:\Proyecto_Ing\WLS_PAISES.csv' WITH DELIMITER ',' CSV HEADER;
+COPY WLS_country (name, weight, shares, id_country, PIB) 
+FROM 'C:\Proyecto_Ing\WLS_COUNTRIES.csv' WITH DELIMITER ',' CSV HEADER;
 
 --WLS_company
 
-COPY WLS_company (id_ticker_company, name, weight, shares, price, sector, country, revenue, total_return) 
-FROM 'C:\Proyecto_Ing\WLS_T1.csv' WITH DELIMITER ',' CSV HEADER;
+COPY WLS_company (id_ticker_company, fecha_renovacion, weight, shares, price, sector, country, revenue, total_return) 
+FROM 'C:\Proyecto_Ing\WLS.csv' WITH DELIMITER ',' CSV HEADER;
 
 --S_and_P
 
-COPY S_and_P (name, price,id_country,sector_company, revenue, id_ticker_sp) 
-FROM 'C:\Proyecto_Ing\S_P.csv' WITH DELIMITER ',' CSV HEADER;
+COPY S_and_P ( id_ticker_sp,fecha, price,id_country,sector_company, revenue) 
+FROM 'C:\Proyecto_Ing\SAP.csv' WITH DELIMITER ',' CSV HEADER;
