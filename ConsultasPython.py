@@ -5,13 +5,13 @@ def Cantidad_Empresas_WLS():
         ORDER BY 1 """
 
 def promedio_ganancias_Empresas_WLS():
-    return """select avg(revenue) as average_revenue, id_ticker_company as company
+    return """select name as company, avg(revenue) as average_revenue
         from WLS_company
         group by company
         """
 
 def promedio_precio_Empresas_WLS():
-    return """select avg(price) as average_price, id_ticker_company as company
+    return """select name as company, avg(price) as average_price
         from WLS_company
         group by company
         """
